@@ -1,8 +1,8 @@
 package main
 
 /*
-	This fucking code is written by a programmer and ethical hacker with the name you don't know because .. you don't need to know that.
-    What this fucking code is doing? Well, If you'll read this code, then you will understand that.
+	This code is written by a programmer and ethical hacker ..
+    What this code is doing? Well, If you'll read this code, then you will understand that.
 */
 
 import (
@@ -45,31 +45,31 @@ type Mail struct {
 }
 
 func main(){
-	// Setting fucking config for post request
+	// Setting config for post request
 	config := Config{
 		URL: 		"https://my.e-klase.lv/?v=15", // Login panel
 		UserName: 	"{YOUR_USERNAME}", 			   // Your username
 		Password: 	"{YOUR_PASSWORD}",			   // Your password
 	}
 
-	// Oh, wait, I need also set fucking data for the fucking request
+	// Oh, wait, I need also set data for the request
 	data := url.Values{}
 	data.Set("UserName", config.UserName)
 	data.Set("Password", config.Password)
 	data.Set("fake_pass", "")
 	data.Set("cmdLogIn", "")
 
-	// Creating fucking POST reqeust to fuck the fucking system
+	// Creating POST reqeust to DOS the system
 	req, err := http.NewRequest(http.MethodPost, config.URL, bytes.NewBufferString(data.Encode()))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Setting fucking headers for the fucking request
+	// Setting headers for the request
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.140 Safari/537.36 OPR/69.2.2399.217")
 
-	// Setting fucking proxies to be fucking anonymous, hahaha.
+	// Setting proxies to be anonymous, hahaha.
 	proxy, err := url.Parse("socks5://localhost:9050")
 	if err != nil {
 		log.Fatal(err)
@@ -78,7 +78,7 @@ func main(){
 		Proxy: http.ProxyURL(proxy),
 	}
 
-	// Creating fucking client who will send this fucking request.. and cookies?
+	// Creating client who will send this request.. and cookies?
 	jar, err := cookiejar.New(nil)
 	if err != nil {
 		log.Fatal(err)
@@ -90,16 +90,16 @@ func main(){
 		Transport: transport,
 	}
 
-	// Sending this fucking request to the fucking server.. yo, #HACKTHEWORLD
+	// Sending this request to the server.. yo, #HACKTHEWORLD
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 
-	// Fucking response from the fucking server
+	// response from the server
 	if resp.StatusCode == 200 {
-		// Reading fucking body
+		// Reading body
 		body, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			log.Fatal(err)
@@ -112,7 +112,7 @@ func main(){
 			os.Exit(1)	
 		}
 
-		// shall we continue this fucking game? p.s. there we are already in the system
+		// shall we continue this game? p.s. there we are already in the system
 		// so, let's send some messages? ... I need to find what we need for that.
 		mail := Mail {
 			Message: Message {
@@ -128,13 +128,13 @@ func main(){
 			},
 		}
 
-		// Making this fucking message to json, why? because we need json and all.
+		// Making this message to json, why? because we need json and all.
 		json, err := json.Marshal(mail)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		// Creating new fucking request to test this shit
+		// Creating new request to test this shit
 		req, err := http.NewRequest(http.MethodPost, "https://my.e-klase.lv/api/family/mail/send", bytes.NewReader(json))
 		if err != nil {
 			log.Fatal(err)
@@ -144,16 +144,16 @@ func main(){
 		req.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3; en-MT) AppleWebKit/536.14.27 (KHTML, like Gecko) Version/13.0.2 Safari/536.14.27")
 		req.Header.Set("Content-Type", "application/json;charset=utf-8")
 
-		// Maybe now we can run send this fucking request and see if that works? (of course, that not works)
+		// Maybe now we can run send this request and see if that works? (of course, that not works)
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer resp.Body.Close()
 
-		// Fucking response from mail API
+		// response from mail API
 		if resp.StatusCode == 200 {
-			// Reading fucking body
+			// Reading body
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
 				log.Fatal(err)
